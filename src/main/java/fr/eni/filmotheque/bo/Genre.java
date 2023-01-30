@@ -1,18 +1,14 @@
 package fr.eni.filmotheque.bo;
 
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
 @Entity
 @Table(name="Genre")
 public class Genre {
 @Id
-@GeneratedValue
-
+@GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     @NotNull
     private String libelle;

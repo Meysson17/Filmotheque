@@ -12,7 +12,7 @@ import javax.validation.constraints.Size;
 @Table(name = "FILMS")
 public class Film {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
     @NotNull
@@ -28,10 +28,23 @@ public class Film {
     @Size(min = 20, max = 250)
     private String synopsis;
 
-    @OneToOne(mappedBy = "realisateur", cascade = CascadeType.PERSIST)
+     @OneToOne(
+             cascade= {CascadeType.PERSIST, CascadeType.MERGE},
+             fetch = FetchType.EAGER
+    )
+     @JoinTable(name="realisateur_id",
+             joinColumns= {@JoinColumn(name="realisateur_id")},
+             inverseJoinColumns= {@JoinColumn(name="film_id")}
+     )
     private Participant realisateur;
 
-    @OneToMany(mappedBy = "acteurs", cascade = CascadeType.PERSIST)
+    @OneToMany(cascade= {CascadeType.PERSIST, CascadeType.MERGE},
+            fetch = FetchType.EAGER)
+    @JoinTable(name="acteurs_id",
+            joinColumns= {@JoinColumn(name="acteurparticipant_id")},
+            inverseJoinColumns= {@JoinColumn(name="film_id")}
+    )
+
     private List<Participant> acteurs;
     @ManyToOne()
     private Genre genre;

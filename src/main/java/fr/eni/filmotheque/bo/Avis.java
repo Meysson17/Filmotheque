@@ -1,16 +1,14 @@
 package fr.eni.filmotheque.bo;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
 @Entity
 @Table(name="Avis")
 public class Avis {
 @Id
-@GeneratedValue
+@GeneratedValue(strategy = GenerationType.IDENTITY)
+
 	private Integer id;
 	@NotNull
 	private int note;
