@@ -42,7 +42,7 @@ img {
 				<td><a th:href="@{/films/{id}(id=${film.id})}"	th:text="${film.titre}"></a></td>
 				<td th:text="${film.anneeSortie}"></td>
 				<td th:text="${film.genre.libelle}"></td>
-				<td	th:text="${film.realisateur.prenom + ' ' + film.realisateur.nom}"></td>
+				<td	th:text="${film.realisateur?.prenom + ' ' + film.realisateur?.nom}"></td>
 			</tr>
 		</table>
 

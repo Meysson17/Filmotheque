@@ -32,19 +32,18 @@ public class Film {
              cascade= {CascadeType.PERSIST, CascadeType.MERGE},
              fetch = FetchType.EAGER
     )
-     @JoinTable(name="realisateur_id",
-             joinColumns= {@JoinColumn(name="realisateur_id")},
-             inverseJoinColumns= {@JoinColumn(name="film_id")}
+     @JoinTable(name="realisateur_film",
+             joinColumns= {@JoinColumn(name="film_id")},
+             inverseJoinColumns= {@JoinColumn(name="realisateur_id")}
      )
     private Participant realisateur;
 
-    @OneToMany(cascade= {CascadeType.PERSIST, CascadeType.MERGE},
+    @ManyToMany(cascade= {CascadeType.PERSIST, CascadeType.MERGE},
             fetch = FetchType.EAGER)
-    @JoinTable(name="acteurs_id",
-            joinColumns= {@JoinColumn(name="acteurparticipant_id")},
-            inverseJoinColumns= {@JoinColumn(name="film_id")}
+    @JoinTable(name="acteurs_film",
+            joinColumns= {@JoinColumn(name="film_id")},
+            inverseJoinColumns= {@JoinColumn(name="acteurparticipant_id")}
     )
-
     private List<Participant> acteurs;
     @ManyToOne()
     private Genre genre;
@@ -70,6 +69,15 @@ public class Film {
 		this.acteurs = new ArrayList<>();
     }
 
+    public Film(String titre, String synopsis, int anneeSortie, int duree, List<Participant> acteurs, Participant realisateur, Genre genre) {
+
+        this.titre = titre;
+        this.anneeSortie = anneeSortie;
+        this.realisateur = realisateur;
+        this.duree = duree;
+        this.genre = genre;
+        this.synopsis = synopsis;
+    }
 
 
     public void addActeur(Participant acteur) {
@@ -154,4 +162,10 @@ public class Film {
 		return "Film [id=" + id + ", titre=" + titre + ", anneeSortie=" + anneeSortie + ", duree=" + duree
 				+ ", synopsis=" + synopsis + ", realisateur=" + realisateur + ", genre=" + genre + "]";
 	}
+
+    public void addAvis(Avis avis) {
+        this.avis.add(avis);
+    }
+
+
 }

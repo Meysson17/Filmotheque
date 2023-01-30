@@ -22,8 +22,7 @@ import fr.eni.filmotheque.services.FilmsService;
 public class FilmsController {
 	
 	private FilmsService filmService;
-	
-	
+
 	@Autowired
 	public FilmsController(FilmsService filmService) {
 		this.filmService = filmService;
@@ -53,16 +52,25 @@ public class FilmsController {
 	
 	@PostMapping("/films/ajouter")
 	public String ajouterFilm(@Valid @ModelAttribute Film film, BindingResult result) {
-
-		if(result.hasErrors()) {			
+		if(result.hasErrors()) {
 			return "ajout-film";
 		}
 
-		
+
 		filmService.ajouterFilm(film);
-		
+
 		return "redirect:/films";
 	}
+//@PostMapping("/films/ajouter")
+//	public String getFilm(@Valid @ModelAttribute Film newFilm,  BindingResult result){
+//	if(result.hasErrors()) {
+//		return "ajout-film";
+//	}
+//
+//	Film film = new Film(newFilm.getTitre(), newFilm.getSynopsis(), newFilm.getAnneeSortie(), newFilm.getDuree(), newFilm.getActeurs(), newFilm.getRealisateur(), newFilm.getGenre());
+//		filmService.ajouterFilm(film);
+//		return "redirect:/films";
+//	}
 
 	
 	@GetMapping("/films/{id}")
