@@ -3,16 +3,21 @@ package fr.eni.filmotheque.bo;
 import java.util.ArrayList;
 import java.util.List;
 
+
+import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
-
+@Entity
+@Table(name = "FILMS")
 public class Film {
-
+    @Id
+    @GeneratedValue
     private Integer id;
 
     @NotNull
     @NotBlank
+    @Column(length = 50, nullable = false)
     private String titre;
 
     @NotNull
@@ -23,13 +28,14 @@ public class Film {
     @Size(min = 20, max = 250)
     private String synopsis;
 
-    @NotNull
+    @OneToOne(mappedBy = "realisateur", cascade = CascadeType.PERSIST)
     private Participant realisateur;
 
+    @OneToMany(mappedBy = "acteurs", cascade = CascadeType.PERSIST)
     private List<Participant> acteurs;
-
+    @ManyToOne()
     private Genre genre;
-
+    @ManyToMany(cascade = CascadeType.PERSIST)
     private List<Avis> avis;
 
 

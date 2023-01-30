@@ -1,12 +1,19 @@
 package fr.eni.filmotheque.bo;
 
+import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 
+@Entity
+@Table(name="Participant")
 public class Participant {
-
+@Id
+@GeneratedValue
 	private Integer id;
-
+	@Column(length = 50, nullable = false)
+	@NotNull
 	private String nom;
-
+	@Column(length = 50, nullable = false)
+	@NotNull
 	private String prenom;
 
 
@@ -52,10 +59,5 @@ public class Participant {
 	public void setPrenom(String prenom) {
 		this.prenom = prenom;
 	}
-
-
-
-
-
 
 }

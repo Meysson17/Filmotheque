@@ -1,18 +1,20 @@
 package fr.eni.filmotheque.bo;
-import javax.persistence.Basic;
-import javax.persistence.Column;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
-import javax.persistence.Transient;
+import javax.validation.constraints.NotNull;
 
+@Entity
+@Table(name="Avis")
 public class Avis {
-	
+@Id
+@GeneratedValue
 	private Integer id;
-	
+	@NotNull
 	private int note;
-	
+	@NotNull
 	private String commentaire;
 
 	public Avis() {
