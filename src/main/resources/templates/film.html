@@ -1,0 +1,71 @@
+<!DOCTYPE>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title th:text="${film.titre}">Détail film</title>
+
+<link rel="stylesheet" th:href="@{/bootstrap-3.3.7/css/bootstrap.min.css}">
+<link rel="stylesheet" th:href="@{/bootstrap-3.3.7/css/bootstrap-theme.min.css}">
+<script th:src="@{/js/jquery.min.js}"></script>
+<script th:src="@{/bootstrap-3.3.7/js/bootstrap.min.js}"></script>
+
+<link rel="stylesheet" href="/css/commun.css">
+
+<style type="text/css">
+.centre {
+	text-align: center;
+}
+
+img {
+	vertical-align: bottom;
+}
+</style>
+</head>
+<body>
+	<ul class="nav nav-tabs" >
+		<li role="presentation" ><a th:href="@{/films}">Les films</a></li>
+		<li role="presentation"><a th:href="@{/films/ajouter}">Ajouter un film</a></li>
+	</ul>
+	<div class="container">
+		<h1 th:text="${film.titre}"></h1>
+		<br />
+		<dl class="row">
+		 <dt class="col-sm-offset-2 col-sm-3">Année de sortie :</dt>
+		 <dd class="col-sm-7"><span th:text="${film.anneeSortie}"></span> </dd>
+		</dl>
+		<dl class="row">
+		 <dt class="col-sm-offset-2 col-sm-3">Réalisateur :</dt>
+		 <dd class="col-sm-7"><span th:text="${film.realisateur.prenom}"></span> <span th:text="${film.realisateur.nom}"></span> </dd>
+	</dl>
+		<dl class="row">
+		 <dt class="col-sm-offset-2 col-sm-3">Durée :</dt>
+		 <dd class="col-sm-7"><span th:text="${film.duree}"></span> minutes</dd>
+		</dl>
+
+	<dl class="row">
+		 <dt class="col-sm-offset-2 col-sm-3">Genre :</dt>
+		 <dd class="col-sm-7"><span th:text="${film.genre.libelle}"></span> </dd>
+	</dl>
+	<dl class="row">		 
+		 <dt class="col-sm-offset-2 col-sm-3">Acteurs : 	</dt>		 
+		 <dd class="col-sm-7" >
+		 	<div th:each="acteur: ${film.acteurs}">
+		 	<span th:text="${acteur.prenom + ' ' + acteur.nom}"></span>
+		 	</div>
+			 				   		
+		 </dd>
+	</dl>
+	
+	<dl class="row">	
+		<dt class="col-sm-offset-2 col-sm-3">Synopsis :</dt>
+		 <dd class="col-sm-7"><p th:text="${film.synopsis}"></p> </dd>
+	</dl>
+		<br>
+		<br>
+			
+			
+	</div>
+
+	<div th:replace="fragments/general.html :: footer"></div>
+</body>
+</html>
