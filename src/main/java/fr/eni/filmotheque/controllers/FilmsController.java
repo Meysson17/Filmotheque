@@ -5,6 +5,8 @@ import java.util.List;
 
 import javax.validation.Valid;
 
+import fr.eni.filmotheque.bo.Avis;
+import fr.eni.filmotheque.services.AvisService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -22,6 +24,8 @@ import fr.eni.filmotheque.services.FilmsService;
 public class FilmsController {
 	
 	private FilmsService filmService;
+
+	private AvisService avisService;
 
 	@Autowired
 	public FilmsController(FilmsService filmService) {
@@ -61,16 +65,6 @@ public class FilmsController {
 
 		return "redirect:/films";
 	}
-//@PostMapping("/films/ajouter")
-//	public String getFilm(@Valid @ModelAttribute Film newFilm,  BindingResult result){
-//	if(result.hasErrors()) {
-//		return "ajout-film";
-//	}
-//
-//	Film film = new Film(newFilm.getTitre(), newFilm.getSynopsis(), newFilm.getAnneeSortie(), newFilm.getDuree(), newFilm.getActeurs(), newFilm.getRealisateur(), newFilm.getGenre());
-//		filmService.ajouterFilm(film);
-//		return "redirect:/films";
-//	}
 
 	
 	@GetMapping("/films/{id}")
@@ -80,6 +74,27 @@ public class FilmsController {
 		
 		return "film";
 	}
-	
+
+
+	@GetMapping("avis/ajouter")
+	public String afficherAjoutAvis(Model modele) {
+		modele.addAttribute("avis", new Avis());
+
+
+		return "ajout-avis";
+	}
+
+
+	@PostMapping("avis/ajouter")
+	public String ajouterAvis(@Valid @ModelAttribute Avis avis, BindingResult result) {
+		if(result.hasErrors()) {
+			return "ajout-avis";
+		}
+
+
+		avisService.ajouterAvis(avis);
+
+		return "redirect:/films";
+	}
 	
 }

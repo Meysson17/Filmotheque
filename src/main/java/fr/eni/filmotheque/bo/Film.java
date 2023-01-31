@@ -28,7 +28,7 @@ public class Film {
     @Size(min = 20, max = 250)
     private String synopsis;
 
-     @OneToOne(
+     @ManyToOne(
              cascade= {CascadeType.PERSIST, CascadeType.MERGE},
              fetch = FetchType.EAGER
     )
@@ -47,7 +47,9 @@ public class Film {
     private List<Participant> acteurs;
     @ManyToOne()
     private Genre genre;
-    @ManyToMany(cascade = CascadeType.PERSIST)
+    @OneToMany(cascade = CascadeType.ALL,
+            fetch=FetchType.LAZY, orphanRemoval=true)
+    @JoinColumn(name="film_id")
     private List<Avis> avis;
 
 

@@ -2,6 +2,7 @@ package fr.eni.filmotheque.services;
 
 import java.util.List;
 
+import fr.eni.filmotheque.repository.AvisRepo;
 import fr.eni.filmotheque.repository.FilmRepo;
 import fr.eni.filmotheque.repository.GenreRepo;
 import fr.eni.filmotheque.repository.ParticipantRepo;
@@ -22,12 +23,6 @@ public class FilmsServiceImpl implements FilmsService {
 
     @Autowired
     private ParticipantRepo participantRepo;
-
-    private List<Film> films;
-    private List<Genre> genres;
-    private List<Participant> participants;
-
-    int compteurFilm = 2;
 
     @Override
     public List<Film> getAllFilms() {

@@ -1,139 +1,141 @@
 <!DOCTYPE>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-<meta charset="UTF-8">
-<title>Ajout film</title>
+    <meta charset="UTF-8">
+    <title>Ajout film</title>
 
-<link rel="stylesheet" th:href="@{/bootstrap-3.3.7/css/bootstrap.min.css}">
-<link rel="stylesheet" th:href="@{/bootstrap-3.3.7/css/bootstrap-theme.min.css}">
-<script th:src="@{/js/jquery.min.js}"></script>
-<script th:src="@{/bootstrap-3.3.7/js/bootstrap.min.js}"></script>
+    <link rel="stylesheet" th:href="@{/bootstrap-3.3.7/css/bootstrap.min.css}">
+    <link rel="stylesheet" th:href="@{/bootstrap-3.3.7/css/bootstrap-theme.min.css}">
+    <script th:src="@{/js/jquery.min.js}"></script>
+    <script th:src="@{/bootstrap-3.3.7/js/bootstrap.min.js}"></script>
 
-<link rel="stylesheet" href="/css/commun.css">
+    <link rel="stylesheet" href="/css/commun.css">
 
-<style type="text/css">
-.centre {
-	text-align: center;
-}
+    <style type="text/css">
+        .centre {
+            text-align: center;
+        }
 
-img {
-	vertical-align: bottom;
-}
-</style>
+        img {
+            vertical-align: bottom;
+        }
+    </style>
 </head>
 <body>
 
-<ul class="nav nav-tabs" >
-		<li role="presentation" ><a th:href="@{/films}">Les films</a></li>
-		<li role="presentation" class="active"><a href="#">Ajouter un film</a></li>
-	</ul>
+<ul class="nav nav-tabs">
+    <li role="presentation"><a th:href="@{/films}">Les films</a></li>
+    <li role="presentation" class="active"><a href="#">Ajouter un film</a></li>
+    <li role="presentation"><a th:href="@{/avis/ajouter}">Ajouter un avis</a></li>
 
-	<h1>Nouveau film</h1>
-	<div class="container">
-	
-	<form class="form-horizontal"
-		th:object="${film}" 
-		th:action="@{/films/ajouter}" method="post">
+</ul>
 
-	<div th:if="${#fields.hasErrors('*')}" class="alert alert-danger">
-		<p th:text="#{index.erreurs}">Message d'erreur</p>
-	</div>
-	
-		<div class="form-group">
-    <label for="inputTitre" class="col-2 control-label">Titre</label>
-      <input type="text" class="form-control col-8" id="inputTitre" 
-       		placeholder="Titre" 
-       		th:field=*{titre}/>
-    <span class="text-danger col-12" th:if="${#fields.hasErrors('titre')}">
+<h1>Nouveau film</h1>
+<div class="container">
+
+    <form class="form-horizontal"
+          th:object="${film}"
+          th:action="@{/films/ajouter}" method="post">
+
+        <div th:if="${#fields.hasErrors('*')}" class="alert alert-danger">
+            <p th:text="#{index.erreurs}">Message d'erreur</p>
+        </div>
+
+        <div class="form-group">
+            <label for="inputTitre" class="col-2 control-label">Titre</label>
+            <input type="text" class="form-control col-8" id="inputTitre"
+                   placeholder="Titre"
+                   th:field=*{titre}/>
+            <span class="text-danger col-12" th:if="${#fields.hasErrors('titre')}">
 			<ul>
 				<li th:each="erreur: ${#fields.errors('titre')}" th:text="${erreur}"></li>
 			</ul>
 	</span>
-    
-  </div>
-  <div class="form-group">
-    <label for="inputSortie" class="col-sm-2 control-label">Année sortie</label>
-      <input type="number" class="form-control col-8" id="inputSortie" 
-      placeholder="Sortie"
-      th:field=*{anneeSortie} />
-		<span class="text-danger col-12" th:if="${#fields.hasErrors('anneeSortie')}">
+
+        </div>
+        <div class="form-group">
+            <label for="inputSortie" class="col-sm-2 control-label">Année sortie</label>
+            <input type="number" class="form-control col-8" id="inputSortie"
+                   placeholder="Sortie"
+                   th:field=*{anneeSortie}/>
+            <span class="text-danger col-12" th:if="${#fields.hasErrors('anneeSortie')}">
 			<ul>
 				<li th:each="erreur: ${#fields.errors('anneeSortie')}" th:text="${erreur}"></li>
 			</ul>
 		</span>
 
-  </div>
-  <div class="form-group">
-    <div class="col-offset-2 col-10">
-        <label>Réalisateur</label>
-      <select class="form-control" required th:field=*{realisateur} >
-      		<option th:each="real:${participants}" 
-      		        th:value="${real.id}" th:text="${real.prenom + ' ' + real.nom}"></option>
-      </select> 
-    </div>
-    <span class="text-danger col-12" th:if="${#fields.hasErrors('realisateur')}">
+        </div>
+        <div class="form-group">
+            <div class="col-offset-2 col-10">
+                <label>Réalisateur</label>
+                <select class="form-control" required th:field=*{realisateur}>
+                    <option th:each="real:${participants}"
+                            th:value="${real.id}" th:text="${real.prenom + ' ' + real.nom}"></option>
+                </select>
+            </div>
+            <span class="text-danger col-12" th:if="${#fields.hasErrors('realisateur')}">
 			<ul>
 				<li th:each="erreur: ${#fields.errors('realisateur')}" th:text="${erreur}"></li>
 			</ul>
 	</span>
-    
-  </div>
-  <div class="form-group">
-    <label for="inputSortie" class="col-2 control-label">Durée</label>
-    <div class="col-10">
-      <input type="number" class="form-control" id="inputSortie"
-      placeholder="Durée" min="0"
-      th:field=*{duree} />
-    </div>
-    <span class="text-danger col-12" th:if="${#fields.hasErrors('duree')}">
+
+        </div>
+        <div class="form-group">
+            <label for="inputSortie" class="col-2 control-label">Durée</label>
+            <div class="col-10">
+                <input type="number" class="form-control" id="inputSortie"
+                       placeholder="Durée" min="0"
+                       th:field=*{duree}/>
+            </div>
+            <span class="text-danger col-12" th:if="${#fields.hasErrors('duree')}">
 			<ul>
 				<li th:each="erreur: ${#fields.errors('duree')}" th:text="${erreur}"></li>
 			</ul>
 		</span>
 
-  </div>
-  <div class="form-group">
-    <div class="col-sm-offset-2 col-sm-10">
-        <label>Genre</label>
-      <select class="form-control" required th:field=*{genre} >
-      		<option th:each="genre:${@filmContextApplication.getGenres()}"
-      		        th:value="${genre.id}" th:text="${genre.libelle}"></option>
-      </select>
-    </div>
-  </div>
-  <div class="form-group">
-    <div class="col-sm-offset-2 col-sm-10">
-        <label>Acteurs</label>
-      <select class="form-control" multiple  th:field=*{acteurs} >
-      		<option th:each="acteur:${participants}"
-      		        th:value="${acteur.id}" th:text="${acteur.prenom + ' ' + acteur.nom}"></option>
-      </select>
-    </div>
-  </div>
-  <div class="form-group">
-    <label for="inputSynopsis" class="col-2 control-label">Synopsis</label>
-    <div class="col-10">
-      <textarea class="form-control" id="inputSynopsis" rows="3" th:field="*{synopsis}"  />
-    </div>
-    <span class="text-danger col-12" th:if="${#fields.hasErrors('synopsis')}">
+        </div>
+        <div class="form-group">
+            <div class="col-sm-offset-2 col-sm-10">
+                <label>Genre</label>
+                <select class="form-control" required th:field=*{genre}>
+                    <option th:each="genre:${@filmContextApplication.getGenres()}"
+                            th:value="${genre.id}" th:text="${genre.libelle}"></option>
+                </select>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-sm-offset-2 col-sm-10">
+                <label>Acteurs</label>
+                <select class="form-control" multiple th:field=*{acteurs}>
+                    <option th:each="acteur:${participants}"
+                            th:value="${acteur.id}" th:text="${acteur.prenom + ' ' + acteur.nom}"></option>
+                </select>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="inputSynopsis" class="col-2 control-label">Synopsis</label>
+            <div class="col-10">
+                <textarea class="form-control" id="inputSynopsis" rows="3" th:field="*{synopsis}"/>
+            </div>
+            <span class="text-danger col-12" th:if="${#fields.hasErrors('synopsis')}">
 			<ul>
 				<li th:each="erreur: ${#fields.errors('synopsis')}" th:text="${erreur}"></li>
 			</ul>
 		</span>
 
-  </div>
-  <div class="form-group">
-    <div class="col-sm-offset-2 col-sm-10">
-      <button type="submit" class="btn btn-default">Ajouter</button>
-    </div>
-  </div>
-	
-	
-	</form>
-		
-	</div> <!-- container -->
-	<div th:replace="fragments/general.html :: footer"></div>
-	
+        </div>
+        <div class="form-group">
+            <div class="col-sm-offset-2 col-sm-10">
+                <button type="submit" class="btn btn-default">Ajouter</button>
+            </div>
+        </div>
+
+
+    </form>
+
+</div> <!-- container -->
+<div th:replace="fragments/general.html :: footer"></div>
+
 
 </body>
 </html>

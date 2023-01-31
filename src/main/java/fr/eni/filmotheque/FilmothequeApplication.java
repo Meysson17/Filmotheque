@@ -1,5 +1,7 @@
 package fr.eni.filmotheque;
 
+import fr.eni.filmotheque.controllers.AvisContextApplication;
+import fr.eni.filmotheque.services.AvisService;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
@@ -19,5 +21,9 @@ public class FilmothequeApplication {
 	@Bean
 	public FilmContextApplication filmContextApplication(FilmsService filmService) {
 		return new FilmContextApplication( filmService);
+	}
+	@Bean
+	public AvisContextApplication avisContextApplication(AvisService avisService) {
+		return new AvisContextApplication( avisService);
 	}
 }

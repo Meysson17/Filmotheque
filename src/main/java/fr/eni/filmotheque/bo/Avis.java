@@ -4,11 +4,9 @@ import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
 @Entity
-@Table(name="Avis")
 public class Avis {
 @Id
 @GeneratedValue(strategy = GenerationType.IDENTITY)
-
 	private Integer id;
 	@NotNull
 	private int note;

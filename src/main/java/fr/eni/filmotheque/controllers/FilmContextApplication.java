@@ -2,6 +2,7 @@ package fr.eni.filmotheque.controllers;
 
 import java.util.List;
 
+import fr.eni.filmotheque.bo.Film;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import fr.eni.filmotheque.bo.Genre;
@@ -13,13 +14,14 @@ public class FilmContextApplication {
 	
 	private List<Genre> genres;
 
-	
+
 	@Autowired
 	public FilmContextApplication(FilmsService filmService) {
 		this.filmService = filmService;
 		genres = filmService.getGenres();
+
 	}
-	
+
 	public List<Genre> getGenres() {
 		return genres;
 	}
